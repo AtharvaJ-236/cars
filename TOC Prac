@@ -1,0 +1,557 @@
+ToC Practical:
+Practical 1:. Design a Program for creating machine that accepts three consecutive one.
+Code:
+states = {
+"q0": {"0": "q0"
+,
+"q1": {"0": "q0"
+,
+"q2": {"0": "q0"
+,
+"q3": {"0": "q3"
+,
+"1": "q1"},
+"1": "q2"},
+"1": "q3"},
+"1": "q3"}
+}
+initial
+final
+_
+state = "q0"
+_
+state = "q3"
+def check
+_
+string_
+recursive(string: str, current
+_
+state: str):
+if not string:
+return current
+state == final
+state
+_
+_
+next
+_
+state = states[current
+_
+state].get(string[0])
+return next
+state and check
+_
+_
+string_
+recursive(string[1:], next
+_
+state)
+user
+_
+input = input("Enter a binary string: ")
+print("Accepted" if set(user
+_
+input) <= {"0"
+,
+initial
+_
+state) else "Not accepted")
+"1"} and check
+_
+string_
+recursive(user
+_
+input,
+Practical 2:. Design a Program for creating machine that accepts the string always ending with
+101.
+Code:
+states = {
+"q0": {"0": "q0"
+,
+"q1": {"0": "q2"
+,
+"q2": {"0": "q0"
+,
+"q3": {"0": "q2"
+,
+"1": "q1"},
+"1": "q1"},
+"1": "q3"},
+"1": "q1"}
+}
+initial
+final
+_
+state = "q0"
+_
+state = "q3"
+def check
+_
+string_
+recursive(string: str, current
+_
+if not string:
+return current
+state == final
+state
+_
+_
+next
+_
+state = states[current
+_
+state].get(string[0])
+state: str):
+return next
+state and check
+_
+_
+string_
+recursive(string[1:], next
+_
+state)
+user
+_
+input = input("Enter a binary string: ")
+print("Accepted" if set(user
+_
+input) <= {"0"
+,
+initial
+_
+state) else "Not accepted")
+"1"} and check
+_
+string_
+recursive(user
+_
+input,
+Practical 3:. Design a program for accepting decimal number divisible by 2.
+Code:
+class DFA:
+def
+init
+__
+__(self):
+self.state = "q0"
+def transition(self, char):
+if self.state == "q0":
+self.state = "q0" if char == '0' else "q1"
+elif self.state == "q1":
+self.state = "q0" if char == '0' else "q1"
+def is
+_
+accepted(self, binary_
+string):
+for char in binary_
+string:
+self.transition(char)
+return self.state == "q0"
+def check
+_
+divisibility_
+by_
+2(decimal
+_
+number):
+binary_
+number = bin(decimal
+_
+number)[2:]
+print(f"Binary representation: {binary_
+number}")
+dfa = DFA()
+if dfa.is
+_
+accepted(binary_
+number):
+print("Accepted: The binary number is divisible by 2.
+")
+else:
+print("Rejected: The binary number is not divisible by 2.
+")
+decimal
+check
+_
+number = int(input("Enter a decimal number: "))
+_
+divisibility_
+by_
+2(decimal
+_
+number)
+Practical 6:. Write a program for generating derivation sequence / language for the given
+sequence of productions.
+Code:
+def generate
+_
+derivation(productions, start
+_
+symbol, target
+_
+queue = [(start
+_
+symbol, [start
+_
+symbol])]
+string):
+while queue:
+current
+_
+string, derivation = queue.pop(0)
+if current
+_
+string == target
+_
+return derivation
+string:
+for lhs in productions:
+if lhs in current
+_
+string:
+for replacement in productions[lhs]:
+new
+_
+string = current
+_
+string.replace(lhs, replacement, 1)
+new
+_
+derivation = derivation + [new
+_
+string]
+queue.append((new
+_
+string, new
+_
+derivation))
+return None
+productions = {}
+num
+_
+rules = int(input("Enter number of production rules: "))
+for
+_
+in range(num
+_
+rules):
+lhs, rhs = input("Enter production rule (e.g., S -> aA | bB): ").split("
+->")
+lhs = lhs.strip()
+rhs = [x.strip() for x in rhs.split("|")]
+productions[lhs] = rhs
+start
+_
+symbol = input("Enter start symbol: ").strip()
+target
+_
+string = input("Enter target string: ").strip()
+derivation
+_
+sequence = generate
+_
+derivation(productions, start
+_
+symbol, target
+_
+string)
+if derivation
+_
+sequence:
+print("\nDerivation Sequence:")
+for step in derivation
+_
+sequence:
+print(step)
+else:
+print("\nNo derivation sequence found.
+")
+Practical 7:. Design a program for creating machine that accepts the string containing a (Given
+input{a, b}).
+Code:
+class DFA:
+def
+init
+__
+__(self):
+self.state = "q0"
+def run(self, input
+_
+string):
+for char in input
+_
+string:
+if char not in {'a'
+,
+'b'}:
+return "REJECTED: Invalid character"
+if char == "a":
+self.state = "q1"
+return "ACCEPTED" if self.state == "q1" else "REJECTED"
+dfa = DFA()
+print(f"Result: {dfa.run(input('Enter a string (a, b only): '))}")
+Practical 8:. Write python code to design a Turing machine to recognize all strings consisting of
+an even
+number of 1’s.
+Code:
+class TuringMachine:
+def
+init
+__
+__(self, tape):
+self.tape = list(tape) + ["
+_
+self.head, self.state = 0,
+self.transitions = {
+("q0"
+,
+"1"): ("q1"
+"1"
+,
+,
+("q1"
+,
+"1"): ("q0"
+"1"
+,
+,
+("q0"
+"
+,
+_
+"): ("q_
+accept"
+("q1"
+"
+,
+_
+"): ("q_
+reject"
+"]
+"q0"
+"R"),
+"R"),
+"
+,
+"
+_
+"
+,
+,
+"
+_
+,
+"N"),
+"N")
+}
+def run(self):
+while self.state not in {"q_
+accept"
+,
+"q_
+reject"}:
+symbol = self.tape[self.head]
+if (self.state, symbol) in self.transitions:
+self.state, self.tape[self.head], move = self.transitions[(self.state, symbol)]
+self.head += 1 if move == "R" else -1 if move == "L" else 0
+return "ACCEPTED" if self.state == "q_
+accept" else "REJECTED"
+user
+_
+input = input("Enter a string of '1's only: ")
+print(TuringMachine(user
+_
+input).run() if set(user
+_
+input) <= {"1"} else "Invalid input!")
+Extra DFA codes:
+1.Constructed DFA that accepts set of all strings that start with 0.
+Code:
+class DFA:
+def
+init
+__
+__(self):
+self.state = "q0"
+self.accepting_
+states = {"q1"}
+def transition(self, char):
+if self.state == "q0":
+self.state = "q1" if char == '0' else "q2"
+elif self.state == "q2":
+self.state = "q2"
+def is
+_
+accepted(self, binary_
+string):
+for char in binary_
+string:
+self.transition(char)
+return self.state in self.accepting_
+states
+user
+_
+input = input("Enter a binary string: ")
+print("Accepted" if user
+_
+input and set(user
+_
+input) <= {"0"
+,
+DFA().is
+_
+accepted(user
+_
+input) else "Rejected")
+"1"} and
+2. Construct a DFA that accepts set of all strings over 0, 1 of a length 2.
+Code:
+class DFA:
+def
+init
+__
+__(self):
+self.state = "q0"
+def transition(self, char):
+if self.state == "q0":
+self.state = "q1" # First character read
+elif self.state == "q1":
+self.state = "q2" # Second character read (Accepting state)
+elif self.state == "q2":
+self.state = "q3" # Trap state (Length > 2)
+elif self.state == "q3":
+self.state = "q3" # Stay trapped
+def is
+_
+accepted(self, binary_
+string):
+for char in binary_
+string:
+if char not in {"0"
+,
+"1"}:
+return False # Invalid character
+self.transition(char)
+return self.state == "q2"
+user
+_
+input = input("Enter a binary string: ")
+dfa = DFA()
+print("Accepted" if dfa.is
+_
+accepted(user
+_
+input) else "Rejected")
+3. Construct a DFA that accepts set of all strings that ends with a.
+Code:
+class DFA:
+def
+init
+__
+__(self):
+self.state = "q0"
+def transition(self, char):
+self.state = "q1" if char == 'a' else "q0"
+def is
+_
+accepted(self, string):
+for char in string:
+if char not in {'a'
+,
+'b'}:
+return False # Invalid input
+self.transition(char)
+return self.state == "q1" # Accept if in q1
+user
+_
+input = input("Enter a string (a/b only): ")
+dfa = DFA()
+print("Accepted" if dfa.is
+_
+accepted(user
+_
+input) else "Rejected")
+4.Construct a DFA that accepts set of all strings over A, B that contains a string AABB
+Code:
+class DFA:
+def
+init
+__
+__(self):
+self.state = "q0"
+def transition(self, char):
+if self.state == "q0":
+self.state = "q1" if char == "A" else "q0"
+elif self.state == "q1":
+self.state = "q2" if char == "A" else "q0"
+elif self.state == "q2":
+self.state = "q3" if char == "B" else "q2" # AA seen, reset on A
+elif self.state == "q3":
+self.state = "q4" if char == "B" else "q0" # AAB seen, needs B
+elif self.state == "q4": # Accepting state
+self.state = "q4"
+def is
+_
+accepted(self, input
+_
+string):
+for char in input
+_
+string:
+if char not in {'A'
+,
+'B'}:
+return "REJECTED: Invalid character"
+self.transition(char)
+return "ACCEPTED" if self.state == "q4" else "REJECTED"
+dfa = DFA()
+user
+_
+input = input("Enter a string (A, B only): ")
+print(f"Result: {dfa.is
+_
+accepted(user
+_
+input)}")
+5. Construct a DFA that not containing a string AABB.
+Code:
+class DFA:
+def
+init
+__
+__(self):
+self.state = "q0"
+def transition(self, char):
+if self.state == "q0":
+self.state = "q1" if char == "A" else "q0"
+elif self.state == "q1":
+self.state = "q2" if char == "A" else "q0"
+elif self.state == "q2":
+self.state = "q3" if char == "B" else "q2"
+elif self.state == "q3":
+self.state = "q4" if char == "B" else "q0"
+elif self.state == "q4": # Trap state
+self.state = "q4"
+def is
+_
+accepted(self, input
+_
+string):
+for char in input
+_
+string:
+if char not in {'A'
+,
+'B'}:
+return "REJECTED: Invalid character"
+self.transition(char)
+return "REJECTED" if self.state == "q4" else "ACCEPTED"
+dfa = DFA()
+user
+_
+input = input("Enter a string (A, B only): ")
+print(f"Result: {dfa.is
+_
+accepted(user
+_
+input)}")
